@@ -32,6 +32,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import org.json.JSONException;
 
+import java.awt.Font;
+import java.awt.font.*;
+
 class Team7 extends JPanel
 {
     double latitude = 33.4255, longitude = 111.9400;
@@ -135,7 +138,7 @@ class WeatherInfo {
     private void updateDarkSKYJSONObject() { 
         String ourAPIKey = "fc32de3a545df155ae6e26a367e4259f";
         String darkSKYURL_ForecastRequest = "https://api.darksky.net/forecast/"+ourAPIKey+"/"+String.valueOf(this.latitude)+","+String.valueOf(this.longitude);
-        System.out.print(darkSKYURL_ForecastRequest);
+        //System.out.print(darkSKYURL_ForecastRequest);
         try { darksky = readJSONFromURL(darkSKYURL_ForecastRequest); }
         catch(IOException e) {} // ignoring exceptions for now
     }
@@ -146,7 +149,7 @@ class WeatherInfo {
         int cp; 
         while((cp=rd.read())!=-1) { // while reader is not at end of buffer
             sb.append((char)cp); // append the current character to stringbuilder
-            System.out.print((char)cp);
+           // System.out.print((char)cp);
         }
         return sb.toString(); //need actual string within buffer, returning that
     }
@@ -202,28 +205,46 @@ class WeatherPanel extends JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents()  {
-        TextHumidity = new javax.swing.JTextField();
-        TextTemperature = new javax.swing.JTextField();
-        TextPrecipitationProbability = new javax.swing.JTextField();
-        TextCloudCover = new javax.swing.JTextField();
-        weatherIcon = new ImageIcon("src\\cse360\\images\\"+geoLocation.getWeatherFieldString("currently","icon")+".png");
+        Font uniformFont = new Font("Courier",Font.TRUETYPE_FONT,9);
+        TextHumidity = new javax.swing.JTextArea(2,10);
+        TextHumidity.setFont(uniformFont);
+        TextTemperature = new javax.swing.JTextArea(2,10);
+        TextTemperature.setFont(uniformFont);
+        TextPrecipitationProbability = new javax.swing.JTextArea(2,10);
+        TextPrecipitationProbability.setFont(uniformFont);
+        TextCloudCover = new javax.swing.JTextArea(2,10);
+        TextCloudCover.setFont(uniformFont);
+        weatherIcon = new ImageIcon("CSE360\\imagesTeam7\\"+geoLocation.getWeatherFieldString("currently","icon")+".png");
         
         weatherLabel = new JLabel("", weatherIcon, JLabel.CENTER);
         weatherLabel.setIcon(weatherIcon);
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new java.awt.GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx=0;c.gridy=0;
+        c.gridheight=2;
+        c.gridwidth=1;
+        c.weightx = 0.333;
+        c.weighty = 1;
 
-        add(weatherLabel,java.awt.BorderLayout.CENTER);
-        TextHumidity.setText(geoLocation.getWeatherFieldString("currently", "humidity")+" [Humidity]");
-        add(TextHumidity, java.awt.BorderLayout.PAGE_START);
+        add(weatherLabel,c);
+        TextHumidity.setText(geoLocation.getWeatherFieldString("currently", "humidity")+"\n[Humidity]");
+        c.gridx=1;c.gridy=0;
+        c.gridheight=1;
+        c.weighty = 0.5;
+        add(TextHumidity,c);
 
-        TextTemperature.setText(geoLocation.getWeatherFieldString("currently", "temperature")+"\u00b0"+" F [Temperature]");
-        add(TextTemperature, java.awt.BorderLayout.PAGE_END);
+        TextTemperature.setText(geoLocation.getWeatherFieldString("currently", "temperature")+"\u00b0"+" F\n[Temperature]");
+        c.gridx=1;c.gridy=1;
+        add(TextTemperature,c);
 
-        TextPrecipitationProbability.setText(geoLocation.getWeatherFieldString("currently", "precipProbability")+" [Probability of Precipitation]");
-        add(TextPrecipitationProbability, java.awt.BorderLayout.LINE_END);
+        TextPrecipitationProbability.setText(geoLocation.getWeatherFieldString("currently", "precipProbability")+"\n [PrecipProb]");
+        c.gridx=2;c.gridy=0;
+        add(TextPrecipitationProbability,c);
 
-        TextCloudCover.setText(geoLocation.getWeatherFieldString("currently", "cloudCover")+" [CloudCover]");
-        add(TextCloudCover, java.awt.BorderLayout.LINE_START);
+        TextCloudCover.setText(geoLocation.getWeatherFieldString("currently", "cloudCover")+"\n [CloudCover]");
+        c.gridx=2;c.gridy=1;
+        add(TextCloudCover,c);
     }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,10 +254,10 @@ class WeatherPanel extends JPanel {
 
     // Variables declaration - do not modify                     
     private javax.swing.JPanel IconImage;
-    private javax.swing.JTextField TextCloudCover;
-    private javax.swing.JTextField TextPrecipitationProbability;
-    private javax.swing.JTextField TextTemperature;
-    private javax.swing.JTextField TextHumidity;
+    private javax.swing.JTextArea TextCloudCover;
+    private javax.swing.JTextArea TextPrecipitationProbability;
+    private javax.swing.JTextArea TextTemperature;
+    private javax.swing.JTextArea TextHumidity;
     // End of variables declaration                   
     
 }
