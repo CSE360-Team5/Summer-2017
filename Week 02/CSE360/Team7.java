@@ -206,7 +206,7 @@ class WeatherPanel extends JPanel {
         TextTemperature = new javax.swing.JTextField();
         TextPrecipitationProbability = new javax.swing.JTextField();
         TextCloudCover = new javax.swing.JTextField();
-        weatherIcon = new ImageIcon("src\\cse360\\imagesTeam7\\"+geoLocation.getWeatherFieldString("currently","icon")+".png");
+        weatherIcon = new ImageIcon("src\\cse360\\images\\"+geoLocation.getWeatherFieldString("currently","icon")+".png");
         
         weatherLabel = new JLabel("", weatherIcon, JLabel.CENTER);
         weatherLabel.setIcon(weatherIcon);
