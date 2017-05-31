@@ -66,12 +66,10 @@ try {
             JSONObject jon = readURL("https://api.darksky.net/forecast/4f02d91363f259f5ca95263c5c032dfc/33.6744664,-112.1386462");
             String weather = jon.getJSONObject("currently").getString("summary");
             int temperature = jon.getJSONObject("currently").getInt("temperature");
-            double time = jon.getJSONObject("currently").getDouble("time");
             double humidity = jon.getJSONObject("currently").getDouble("humidity");
             double visibility = jon.getJSONObject("currently").getDouble("visibility");
             double dewPoint = jon.getJSONObject("currently").getDouble("dewPoint");
             
-            // String timeZone = jon.getJSONObject().getString("timezone");
 
      
             String degree = "\u00b0";
@@ -82,14 +80,13 @@ try {
             label.setFont(myFont);
             JLabel label2 = new JLabel("\n Temperature: " + Double.toString(temperature) + degree  + "F");
             label2.setFont(myFont);
-            JLabel label3 = new JLabel("\n Humidity: " + Double.toString(humidity) + " ");
+            JLabel label3 = new JLabel("\n Humidity: " + Double.toString(humidity) + "%");
             label3.setFont(myFont);
             JLabel label4 = new JLabel("\n Visibility: " + Double.toString(visibility) + "%");
             label4.setFont(myFont);
-            JLabel label5 = new JLabel("\n dewPoint: " + Double.toString(dewPoint) + degree +  "F ");
+            JLabel label5 = new JLabel("\n Dew point: " + Double.toString(dewPoint) + degree +  "F ");
             label5.setFont(myFont);
 
-//try  {
    String imageURL = "https://maps.googleapis.com/maps/api/staticmap?center=Tempe,CA&zoom=10&size=500x500";
    String destinationFile = "image.jpg";
    URL url = new URL(imageURL);
@@ -103,26 +100,14 @@ out.write(b,0,lenght); //change
                 
                 in.close();
        out.close();
-//} catch(Exception e){
-//System.exit(1);
-//}
-               // JPanel main = new JPanel();
-               // main.setPreferredSize(new Dimension(200,200));
-                //main.setVisible(true);
                 
 JPanel panel = new JPanel();
-               // panel.setBackground(Color.RED);
                 panel.setPreferredSize(new Dimension(150, 150));
                 panel.setVisible(true);
-                
                 JPanel panel2 = new JPanel();
-                //panel.setBackground(Color.YELLOW);
                 panel2.setPreferredSize(new Dimension(150,150));
                 panel2.setVisible(true);
-                
-               // JLabel label3 = new JLabel(Integer.toString(time));
-                
-                
+
                 panel2.add(label);
                 panel2.add(label2);
                 panel2.add(label3);
@@ -132,19 +117,13 @@ JPanel panel = new JPanel();
                 
 panel.add(new JLabel( new ImageIcon(( new ImageIcon("image.jpg")).getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH))));
                 setLayout(new GridLayout(2,1,20,0));
-               // main.add(panel);
-                //main.add(panel2);
-                
-                
+
                 add(panel);
                 add(panel2);
-
-                //test.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
                 
                 
 setVisible(true);
-                //this.pack();
-//this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     
         } catch(IOException e){
                  System.exit(1);     
