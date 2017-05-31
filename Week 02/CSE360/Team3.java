@@ -1,7 +1,7 @@
 //Authors:  Devyn Hedin
 //          Jonathon Proctor
 //          Thunpisit Amnuaikiatloet
-//package CSE360;
+package CSE360;
 
 import java.awt.*;
 
@@ -26,7 +26,11 @@ public class Team3 extends JPanel {
     private JPanel mainPanel, mapPanel, weatherPanel; //super panel with two sub panels for the map and for the weather
     private JLabel weatherStatus, visibility, temperature; //Three pieces of weather information
     private String c1, c2; //Coordinates
-    
+
+    //WEEK 3 CODE
+    private JDialog dialog;
+    //EMD OF WEEK 3 CODE
+
     // Team3 constructor
     public Team3() throws JSONException {
         mapPanel = new JPanel();
@@ -36,6 +40,10 @@ public class Team3 extends JPanel {
         weatherStatus = new JLabel();
         visibility = new JLabel();
         temperature = new JLabel();
+
+        //WEEK 3 CODE
+        dialog = new JDialog();
+        //END OF WEEK 3 CODE
 
         //Initializing to test values
         c1 = "33.424564";
