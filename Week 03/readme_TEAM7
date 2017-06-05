@@ -1,0 +1,18 @@
+- Team 7 members
+Haoyu Xu
+Chen Yang
+Pemma Reiter
+
+- Project 3 directory structure requirements
+Week 03/
+  CSE360/
+    Team7.java 
+    imagesTeam7/
+       <icons for weather>.jpg
+    
+
+- Project 3 tested with 
+     Project 2 Universe.java class
+     project definitions assuming above directory structure
+     No additional include directories
+     Addition of org.json JAR to included JARs
