@@ -48,7 +48,7 @@ class Team7 extends JPanel
     
     Team7()
     {
-        GridLayout grid = new GridLayout(1, 4);
+        GridLayout grid = new GridLayout(1, 3);
         setLayout(grid);
         setVisible(true);
         
@@ -81,7 +81,7 @@ class Team7 extends JPanel
                 latitude = 33.4255;
                 longitude = -111.9400;
             }
-            else if(result.equals("New Youk"))
+            else if(result.equals("New York"))
             {
                 latitude = 40.7128;
                 longitude = -74.0059;
@@ -283,8 +283,14 @@ class WeatherPanel extends JPanel {
     private WeatherInfo geoLocation;
     private ImageIcon weatherIcon;
     private JLabel weatherLabel;
-
-
+    // Variables declaration - do not modify                     
+    private javax.swing.JPanel IconImage;
+    private javax.swing.JTextArea TextSummary;
+    private javax.swing.JTextArea TextCloudCover;
+    private javax.swing.JTextArea TextPrecipitationProbability;
+    private javax.swing.JTextArea TextTemperature;
+    private javax.swing.JTextArea TextHumidity;
+    // End of variables declaration 
     /**
      * Creates new form WeatherPanel
      */
@@ -296,6 +302,8 @@ class WeatherPanel extends JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents()  {
         Font uniformFont = new Font("Courier",Font.TRUETYPE_FONT,9);
+        TextSummary = new javax.swing.JTextArea(2,10);
+        TextSummary.setFont(uniformFont);
         TextHumidity = new javax.swing.JTextArea(2,10);
         TextHumidity.setFont(uniformFont);
         TextTemperature = new javax.swing.JTextArea(2,10);
@@ -312,16 +320,17 @@ class WeatherPanel extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.gridx=0;c.gridy=0;
-        c.gridheight=2;
+        c.gridheight=1;
         c.gridwidth=1;
         c.weightx = 0.333;
-        c.weighty = 1;
+        c.weighty = 0.5;
 
         add(weatherLabel,c);
+        c.gridx=0;c.gridy=1;
+        TextSummary.setText(geoLocation.getWeatherFieldString("currently", "summary"));
+        add(TextSummary,c);
         TextHumidity.setText(geoLocation.getWeatherFieldString("currently", "humidity")+"\n[Humidity]");
         c.gridx=1;c.gridy=0;
-        c.gridheight=1;
-        c.weighty = 0.5;
         add(TextHumidity,c);
 
         TextTemperature.setText(geoLocation.getWeatherFieldString("currently", "temperature")+"\u00b0"+" F\n[Temperature]");
@@ -342,13 +351,7 @@ class WeatherPanel extends JPanel {
     }
 
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JPanel IconImage;
-    private javax.swing.JTextArea TextCloudCover;
-    private javax.swing.JTextArea TextPrecipitationProbability;
-    private javax.swing.JTextArea TextTemperature;
-    private javax.swing.JTextArea TextHumidity;
-    // End of variables declaration                   
+                  
     
 }
 
