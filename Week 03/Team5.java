@@ -1,6 +1,9 @@
 package CSE360;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,11 +33,26 @@ public class Team5 extends JPanel {
 	public Team5() {
 
 		// Creates main panel to put two panels into
-		JPanel main = new JPanel(new GridLayout(1, 2));
+		JPanel main = new JPanel(new BorderLayout());
 
 		// Adds Weather and Google panels to the main panel
-		main.add(Weather());
-		main.add(Google());
+		main.add(Weather(), BorderLayout.EAST);
+		main.add(Google(), BorderLayout.WEST);
+		JButton button;
+		main.add(button = new JButton("Select City"), BorderLayout.SOUTH);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				input = (String) JOptionPane.showInputDialog(null, "Choose city: ", "City Data", JOptionPane.QUESTION_MESSAGE, null,
+						cities, cities[0]);
+				SetInput();
+				main.removeAll();
+				main.add(Weather(), BorderLayout.EAST);
+				main.add(Google(), BorderLayout.WEST);
+				main.add(button, BorderLayout.SOUTH);
+				revalidate();
+				repaint();
+			}
+		});
 
 		add(main);
 
@@ -95,7 +113,7 @@ public class Team5 extends JPanel {
 		// New Panel weather
 		JPanel weather = new JPanel();
 		SetInput();
-
+		
 		try {
 			JSONObject json = readJsonFromUrl(
 					"https://api.darksky.net/forecast/f657e7aed849b4520c258bb7bd2f093c/" + lng + "," + lat);
@@ -105,7 +123,7 @@ public class Team5 extends JPanel {
 
 			String n0 = json.getJSONObject("currently").getString("summary");
 			String n1 = "Visibility: " + json.getJSONObject("currently").getDouble("visibility");
-			String n2 = "humidity: " + json.getJSONObject("currently").getDouble("humidity");
+			String n2 = "Humidity: " + json.getJSONObject("currently").getDouble("humidity");
 			String n3 = "Temperature: " + json.getJSONObject("currently").getDouble("apparentTemperature");
 			String n4 = "WindSpeed: " + json.getJSONObject("currently").getDouble("windSpeed");
 			String n5 = "CloudCover: " + json.getJSONObject("currently").getDouble("cloudCover");
@@ -159,7 +177,7 @@ public class Team5 extends JPanel {
 		// New panel map
 		JPanel map = new JPanel();
 		SetInput();
-
+		
 		// Used if you want to have user input
 		Scanner reader = new Scanner(System.in);
 		try {
