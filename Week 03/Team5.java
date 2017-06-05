@@ -45,62 +45,65 @@ public class Team5 extends JPanel {
 		// New Panel weather
 		JPanel weather = new JPanel();
 
-		try {
+		if ((input != null) && (input.length() > 0)) {
 
-			if (input == "Austin, TX") {
-				lng = 30.2731851; // reader.nextDouble();
-				lat = -97.7424588; // reader.nextDouble();
-			} else if (input == "Arlington, TX") {
-				lng = 32.7357;
-				lat = -97.1081;
-			} else if (input == "New York, NY") {
-				lng = 40.714728;
-				lat = -73.998672;
-			} else if (input == "Phoenix, AZ") {
-				lng = 33.6050991;
-				lat = -112.4052444;
-			} else if (input == "San Diego, CA") {
-				lng = 32.7276824;
-				lat = -117.1867012;
-			} else if (input == "Bangor, ME") {
-				lng = 44.829648;
-				lat = -68.8591154;
-			} else if (input == "Chandler, AZ") {
-				lng = 33.2827979;
-				lat = -111.9338934;
-			} else if (input == "Los Angeles, CA") {
-				lng = 34.0531837;
-				lat = -118.3431097;
-			} else if (input == "Tampa Bay, FL") {
-				lng = 27.766716;
-				lat = -82.8522007;
-			} else if (input == "Chicago, IL") {
-				lng = 41.8333925;
-				lat = -88.0123439;
+			try {
+
+				if (input == "Austin, TX") {
+					lng = 30.2731851; // reader.nextDouble();
+					lat = -97.7424588; // reader.nextDouble();
+				} else if (input == "Arlington, TX") {
+					lng = 32.7357;
+					lat = -97.1081;
+				} else if (input == "New York, NY") {
+					lng = 40.714728;
+					lat = -73.998672;
+				} else if (input == "Phoenix, AZ") {
+					lng = 33.6050991;
+					lat = -112.4052444;
+				} else if (input == "San Diego, CA") {
+					lng = 32.7276824;
+					lat = -117.1867012;
+				} else if (input == "Bangor, ME") {
+					lng = 44.829648;
+					lat = -68.8591154;
+				} else if (input == "Chandler, AZ") {
+					lng = 33.2827979;
+					lat = -111.9338934;
+				} else if (input == "Los Angeles, CA") {
+					lng = 34.0531837;
+					lat = -118.3431097;
+				} else if (input == "Tampa Bay, FL") {
+					lng = 27.766716;
+					lat = -82.8522007;
+				} else if (input == "Chicago, IL") {
+					lng = 41.8333925;
+					lat = -88.0123439;
+				}
+
+				JSONObject json = readJsonFromUrl(
+						"https://api.darksky.net/forecast/f657e7aed849b4520c258bb7bd2f093c/" + lng + "," + lat);
+				System.out.println(json.getJSONObject("currently").getString("summary"));
+
+				JLabel j1 = new JLabel("visibility:");
+
+				String n0 = json.getJSONObject("currently").getString("summary");
+				String n1 = "Visibility: " + json.getJSONObject("currently").getDouble("visibility");
+				String n2 = "humidity: " + json.getJSONObject("currently").getDouble("humidity");
+				String n3 = "Temperature: " + json.getJSONObject("currently").getDouble("apparentTemperature");
+				String n4 = "WindSpeed: " + json.getJSONObject("currently").getDouble("windSpeed");
+				String n5 = "CloudCover: " + json.getJSONObject("currently").getDouble("cloudCover");
+
+				String strMsg = "<html><body>" + input + ": " + n0 + "<br>" + n3 + "<br>" + n2 + "<br>" + n1 + "<br>"
+						+ n4 + "<br>" + n5 + "<body></html>";
+
+				j1.setText(strMsg);
+
+				weather.add(j1);
+
+			} catch (IOException e) {
+				System.exit(1);
 			}
-
-			JSONObject json = readJsonFromUrl(
-					"https://api.darksky.net/forecast/f657e7aed849b4520c258bb7bd2f093c/" + lng + "," + lat);
-			System.out.println(json.getJSONObject("currently").getString("summary"));
-
-			JLabel j1 = new JLabel("visibility:");
-
-			String n0 = json.getJSONObject("currently").getString("summary");
-			String n1 = "Visibility: " + json.getJSONObject("currently").getDouble("visibility");
-			String n2 = "humidity: " + json.getJSONObject("currently").getDouble("humidity");
-			String n3 = "Temperature: " + json.getJSONObject("currently").getDouble("apparentTemperature");
-			String n4 = "WindSpeed: " + json.getJSONObject("currently").getDouble("windSpeed");
-			String n5 = "CloudCover: " + json.getJSONObject("currently").getDouble("cloudCover");
-
-			String strMsg = "<html><body>" + input + ": " + n0 + "<br>" + n3 + "<br>" + n2 + "<br>" + n1 + "<br>" + n4
-					+ "<br>" + n5 + "<body></html>";
-
-			j1.setText(strMsg);
-
-			weather.add(j1);
-
-		} catch (IOException e) {
-			System.exit(1);
 		}
 
 		// Add Border
@@ -143,72 +146,74 @@ public class Team5 extends JPanel {
 
 		// Used if you want to have user input
 		Scanner reader = new Scanner(System.in);
-		try {
+		if ((input != null) && (input.length() > 0)) {
+			try {
 
-			if (input == "Austin, TX") {
-				lng = 30.2731851; // reader.nextDouble();
-				lat = -97.7424588; // reader.nextDouble();
-				zoom = 13; // reader.nextInt();
-			} else if (input == "Arlington, TX") {
-				lng = 32.7357;
-				lat = -97.1081;
-				zoom = 16;
-			} else if (input == "New York, NY") {
-				lng = 40.714728;
-				lat = -73.998672;
-				zoom = 11;
-			} else if (input == "Phoenix, AZ") {
-				lng = 33.6050991;
-				lat = -112.4052444;
-				zoom = 14;
-			} else if (input == "San Diego, CA") {
-				lng = 32.7276824;
-				lat = -117.1867012;
-				zoom = 10;
-			} else if (input == "Bangor, ME") {
-				lng = 44.829648;
-				lat = -68.8591154;
-				zoom = 10;
-			} else if (input == "Chandler, AZ") {
-				lng = 33.2827979;
-				lat = -111.9338934;
-				zoom = 14;
-			} else if (input == "Los Angeles, CA") {
-				lng = 34.0531837;
-				lat = -118.3431097;
-				zoom = 10;
-			} else if (input == "Tampa Bay, FL") {
-				lng = 27.9707307;
-				lat = -82.519097;
-				zoom = 12;
-			} else if (input == "Chicago, IL") {
-				lng = 41.8333925;
-				lat = -88.0123439;
-				zoom = 14;
+				if (input == "Austin, TX") {
+					lng = 30.2731851; // reader.nextDouble();
+					lat = -97.7424588; // reader.nextDouble();
+					zoom = 13; // reader.nextInt();
+				} else if (input == "Arlington, TX") {
+					lng = 32.7357;
+					lat = -97.1081;
+					zoom = 16;
+				} else if (input == "New York, NY") {
+					lng = 40.714728;
+					lat = -73.998672;
+					zoom = 11;
+				} else if (input == "Phoenix, AZ") {
+					lng = 33.6050991;
+					lat = -112.4052444;
+					zoom = 14;
+				} else if (input == "San Diego, CA") {
+					lng = 32.7276824;
+					lat = -117.1867012;
+					zoom = 10;
+				} else if (input == "Bangor, ME") {
+					lng = 44.829648;
+					lat = -68.8591154;
+					zoom = 10;
+				} else if (input == "Chandler, AZ") {
+					lng = 33.2827979;
+					lat = -111.9338934;
+					zoom = 14;
+				} else if (input == "Los Angeles, CA") {
+					lng = 34.0531837;
+					lat = -118.3431097;
+					zoom = 10;
+				} else if (input == "Tampa Bay, FL") {
+					lng = 27.9707307;
+					lat = -82.519097;
+					zoom = 12;
+				} else if (input == "Chicago, IL") {
+					lng = 41.8333925;
+					lat = -88.0123439;
+					zoom = 14;
+				}
+
+				// Image url
+				String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + lng + "," + lat
+						+ "&zoom=" + zoom + "&size=640x640&maptype=road";
+
+				String destinationFile = "image.jpg";
+				URL url = new URL(imageUrl);
+				InputStream is = url.openStream();
+				OutputStream os = new FileOutputStream(destinationFile);
+
+				byte[] b = new byte[2048];
+				int length;
+
+				while ((length = is.read(b)) != -1) {
+					os.write(b, 0, length);
+				}
+
+				is.close();
+				os.close();
+				reader.close();
+
+			} catch (IOException e) {
+				System.exit(1);
 			}
-
-			// Image url
-			String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?" + "center=" + lng + "," + lat + "&zoom="
-					+ zoom + "&size=640x640&maptype=road";
-
-			String destinationFile = "image.jpg";
-			URL url = new URL(imageUrl);
-			InputStream is = url.openStream();
-			OutputStream os = new FileOutputStream(destinationFile);
-
-			byte[] b = new byte[2048];
-			int length;
-
-			while ((length = is.read(b)) != -1) {
-				os.write(b, 0, length);
-			}
-
-			is.close();
-			os.close();
-			reader.close();
-
-		} catch (IOException e) {
-			System.exit(1);
 		}
 
 		map.setPreferredSize(new Dimension(245, 245));
