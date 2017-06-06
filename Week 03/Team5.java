@@ -34,10 +34,11 @@ public class Team5 extends JPanel {
 
 		// Creates main panel to put two panels into
 		JPanel main = new JPanel(new BorderLayout());
+		JPanel extra = new JPanel(new BorderLayout());
 
 		// Adds Weather and Google panels to the main panel
-		main.add(Weather(), BorderLayout.EAST);
-		main.add(Google(), BorderLayout.WEST);
+		extra.add(Weather(), BorderLayout.EAST);
+		extra.add(Google(), BorderLayout.WEST);
 		JButton button;
 		main.add(button = new JButton("Select City"), BorderLayout.SOUTH);
 		button.addActionListener(new ActionListener() {
@@ -46,13 +47,16 @@ public class Team5 extends JPanel {
 						cities, cities[0]);
 				SetInput();
 				main.removeAll();
-				main.add(Weather(), BorderLayout.EAST);
-				main.add(Google(), BorderLayout.WEST);
+				extra.removeAll();
+				extra.add(Weather(), BorderLayout.EAST);
+				extra.add(Google(), BorderLayout.WEST);
 				main.add(button, BorderLayout.SOUTH);
+				main.add(extra, BorderLayout.NORTH);
 				revalidate();
 				repaint();
 			}
 		});
+		main.add(extra, BorderLayout.NORTH);
 
 		add(main);
 
@@ -112,6 +116,7 @@ public class Team5 extends JPanel {
 
 		// New Panel weather
 		JPanel weather = new JPanel();
+		weather.setPreferredSize(new Dimension(250, 125));
 		SetInput();
 		
 		try {
@@ -140,7 +145,7 @@ public class Team5 extends JPanel {
 		}
 
 		// Add Border
-		weather.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
+		//weather.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
 
 		// Set Background
 		weather.setBackground(Color.white);
@@ -206,11 +211,11 @@ public class Team5 extends JPanel {
 			System.exit(1);
 		}
 
-		map.setPreferredSize(new Dimension(245, 245));
+		map.setPreferredSize(new Dimension(250, 125));
 
 		// Adds map to map Panel
 		map.add(new JLabel(new ImageIcon(
-				(new ImageIcon("image.jpg")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH))));
+				(new ImageIcon("image.jpg")).getImage().getScaledInstance(175, 175, java.awt.Image.SCALE_SMOOTH))));
 
 		// Returns map panel
 		return map;
