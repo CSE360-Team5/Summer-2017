@@ -29,6 +29,7 @@ public class Team5 extends JPanel {
 			"Chandler, AZ", "Los Angeles, CA", "Tampa Bay, FL", "Chicago, IL" };
 	String input = (String) JOptionPane.showInputDialog(null, "Choose city: ", "City Data",
 			JOptionPane.QUESTION_MESSAGE, null, cities, cities[0]);
+	String inputb = input;
 
 	public Team5() {
 
@@ -43,8 +44,11 @@ public class Team5 extends JPanel {
 		main.add(button = new JButton("Select City"), BorderLayout.SOUTH);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				input = (String) JOptionPane.showInputDialog(null, "Choose city: ", "City Data", JOptionPane.QUESTION_MESSAGE, null,
-						cities, cities[0]);
+				input = (String) JOptionPane.showInputDialog(null, "Choose city: ", "City Data",
+						JOptionPane.QUESTION_MESSAGE, null, cities, cities[0]);
+				if (input == null){
+					input = inputb;
+				}
 				SetInput();
 				main.removeAll();
 				extra.removeAll();
@@ -68,47 +72,65 @@ public class Team5 extends JPanel {
 				lng = 30.2731851; // reader.nextDouble();
 				lat = -97.7424588; // reader.nextDouble();
 				zoom = 13; // reader.nextInt();
+				inputb = input;
+
 			} else if (input == "Arlington, TX") {
 				lng = 32.7357;
 				lat = -97.1081;
 				zoom = 16;
+				inputb = input;
+
 			} else if (input == "New York, NY") {
 				lng = 40.714728;
 				lat = -73.998672;
 				zoom = 11;
+				inputb = input;
+
 			} else if (input == "Phoenix, AZ") {
 				lng = 33.6050991;
 				lat = -112.4052444;
 				zoom = 14;
+				inputb = input;
+
 			} else if (input == "San Diego, CA") {
 				lng = 32.7276824;
 				lat = -117.1867012;
 				zoom = 10;
+				inputb = input;
+
 			} else if (input == "Bangor, ME") {
 				lng = 44.829648;
 				lat = -68.8591154;
 				zoom = 10;
+				inputb = input;
+
 			} else if (input == "Chandler, AZ") {
 				lng = 33.2827979;
 				lat = -111.9338934;
 				zoom = 14;
+				inputb = input;
+
 			} else if (input == "Los Angeles, CA") {
 				lng = 34.0531837;
 				lat = -118.3431097;
 				zoom = 10;
+				inputb = input;
+
 			} else if (input == "Tampa Bay, FL") {
 				lng = 27.9707307;
 				lat = -82.519097;
 				zoom = 12;
+				inputb = input;
+
 			} else if (input == "Chicago, IL") {
 				lng = 41.8333925;
 				lat = -88.0123439;
 				zoom = 14;
-			}
-		} else {
+				inputb = input;
 
-			System.exit(1);
-		}
+			}
+			
+		} 
 
 	}
 
@@ -145,7 +167,7 @@ public class Team5 extends JPanel {
 		}
 
 		// Add Border
-		//weather.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
+		weather.setBorder(BorderFactory.createLineBorder(Color.blue, 3));
 
 		// Set Background
 		weather.setBackground(Color.white);
