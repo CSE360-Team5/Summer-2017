@@ -1,5 +1,13 @@
 package CSE360;
 
+/*
+ * Team 5
+ * @author Melissa Day
+ * @author Austin McCleary
+ * @author Zelin Bao
+ * @author Yuxue Zhou
+ */
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -131,6 +139,9 @@ public class Team5 extends JPanel {
 			}
 			
 		} 
+		else {
+			System.exit(1);
+		}
 
 	}
 
