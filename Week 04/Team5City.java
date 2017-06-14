@@ -56,6 +56,9 @@ public class Team5City extends JPanel {
 				PromptForInput();
 			}
 		});
+		main.setBorder(BorderFactory.createLineBorder(Color.red, 1));
+		main.setSize(500,125);
+		main.setOpaque(false);
 		add(main);
 	}
 

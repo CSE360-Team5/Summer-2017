@@ -25,6 +25,7 @@ public class Team5Ghost extends JPanel implements Runnable {
 		
 		JPanel Team5GhostPanel = new JPanel();
 		Team5GhostPanel.add(setGhostPanel());
+		Team5GhostPanel.setOpaque(false);
 		
 		movingGhost = new Thread (this);
         movingGhost.start();
@@ -40,11 +41,11 @@ public class Team5Ghost extends JPanel implements Runnable {
         ghostPanel.setSize(200,300);
         
        JLabel ghost = new JLabel(new ImageIcon(
-                (new ImageIcon("C:/Users/Melissa/Documents/Eclipse/CSE360/src/Team5Images/Ghost.png")).getImage()));
+                (new ImageIcon("C:/Eclipse/Eclipse Workspace/CSE 360/src/Images/Ghost.png")).getImage()));
        ghostPanel.add(ghost);
         
         //ghostPanel.add(ghostLbl);
-        ghostPanel.setOpaque(true);
+        ghostPanel.setOpaque(false);
         ghostPanel.setBounds(x, y, 100, 100);
  
         return ghostPanel;
@@ -61,6 +62,7 @@ public class Team5Ghost extends JPanel implements Runnable {
  		
  		ghostPanel.revalidate();
  		ghostPanel.repaint();
+ 		ghostPanel.setOpaque(false);
  		try {
  			for (int i = 1; i < 100000; i++) {
  				
@@ -86,6 +88,7 @@ public class Team5Ghost extends JPanel implements Runnable {
  					yvalueChange = yChange;
  				}
  				ghostPanel.setBounds(x, y, 100, 100);
+ 				ghostPanel.setOpaque(false);
  				
  				Thread.sleep(100); // making num in parameter seems to make image move faster
  			}
