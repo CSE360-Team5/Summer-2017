@@ -1,3 +1,10 @@
+/*CSE 360
+ *Team1
+ *Manuel Bravo
+ *Daniel Ene Neagu
+ *Rozhin Azima
+ *Shrinivas Bhat
+ */
 package CSE360;
 
 import java.awt.Color;
