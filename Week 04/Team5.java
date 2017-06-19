@@ -1,5 +1,13 @@
 package CSE360;
 
+/*
+ * Team 5
+ * @author Melissa Day
+ * @author Austin McCleary
+ * @author Zelin Bao
+ * @author Yuxue Zhou
+ */
+
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,13 +22,12 @@ public class Team5 extends JPanel implements ActionListener {
 
 		// Add border
 		setBorder(BorderFactory.createLineBorder(Color.green, 5));
-		setSize(500,500);
+		setSize(500,600);
 		// Add names
 		JLabel label1 = new JLabel("Team 5:");
-		JLabel label2 = new JLabel("Melissa Day,");
-		JLabel label3 = new JLabel("Austin McCleary,");
-		JLabel label4 = new JLabel("Yuxue Zhou,");
-		JLabel label5 = new JLabel("Zelin Bao");
+		JLabel label2 = new JLabel("Austin McCleary,");
+		JLabel label3 = new JLabel("Yuxue Zhou,");
+		JLabel label4 = new JLabel("Zelin Bao");
 
 		// set font & size
 		label1.setFont(new Font("Rockwell", 1, 20));
@@ -29,18 +36,18 @@ public class Team5 extends JPanel implements ActionListener {
 		add(label2);
 		add(label3);
 		add(label4);
-		add(label5);
+		
 
-		button = new JButton(new ImageIcon("C:/Eclipse/Eclipse Workspace/CSE 360/src/Images/setting.jpg"));
+		button = new JButton();
+		button.setIcon(new ImageIcon(this.getClass().getResource("/Team5Images/setting.jpg")));
 		button.setPreferredSize(new Dimension(90, 50));
 		button.addActionListener(this);
 		button.setVisible(true);
 		button.setBounds(150, 70, 100, 100);
 
 		this.setLayout(new FlowLayout());
-		this.setBounds(125, 80, 500, 500);
+		this.setBounds(125, 80, 250, 155);
 		this.setVisible(true);
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		add(button);
 	}
@@ -52,10 +59,14 @@ public class Team5 extends JPanel implements ActionListener {
 			this.removeAll();
 			this.setBorder(null);
 			add(new Team5Layers());
-			//this.repaint();
-			//this.setVisible(true);
 
 		}
 	}
 
+	 public static void main(String[] args) {
+		 JFrame j = new JFrame();
+		 Team5 t = new Team5();
+		 j.add(t);
+		 j.setVisible(true);
+	 }
 }
