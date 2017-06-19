@@ -5,6 +5,7 @@
 // Devyn Hedin
 // Thunpisit Amnuaikiatloet
 // Jonathan Proctor
+// Melissa Day
 
 // need to import for JPanel and JRadioButton
 import javax.swing.*;
@@ -18,8 +19,7 @@ public class Team3Cover extends JPanel {
 	private JRadioButton b1, b2, b3;
 
 	// Team3 Constructor
-	public Team3Cover()
-	{
+	public Team3Cover() {
 	
 	// set label of JRadioButtons
 	b1 = new JRadioButton("CSE 360");
@@ -31,6 +31,4 @@ public class Team3Cover extends JPanel {
 	add(b2);
 	add(b3);
 	}
-	
-	
 }

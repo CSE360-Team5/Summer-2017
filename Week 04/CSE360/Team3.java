@@ -1,6 +1,7 @@
 //Authors:  Devyn Hedin
 //          Jonathan Proctor
 //          Thunpisit Amnuaikiatloet
+//          Melissa Day
 
 package CSE360;
 
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 
-public class Team3 extends JPanel implements ActionListener{
+public class Team3 extends JPanel implements ActionListener {
     private JPanel mainPanel, mapPanel, weatherPanel; //super panel with two sub panels for the map and for the weather
     private JLabel weatherStatus, humidity, temperature; //Three pieces of weather information
     private String c1, c2; //Coordinates
@@ -33,6 +34,7 @@ public class Team3 extends JPanel implements ActionListener{
     private JButton chooseLocation;
     private Team3Cover cover;
     private Team3Ghost ghost;
+    private Thread thread;
     //END NEW CODE
 
     // Team3 constructor
@@ -46,75 +48,28 @@ public class Team3 extends JPanel implements ActionListener{
         chooseLocation = new JButton("Cities");
         chooseLocation.addActionListener(this);
         cover = new Team3Cover();
-        try {
-            ghost = new Team3Ghost();
-        } catch(IOException exc) {
-            System.exit(1);
-        }
+        ghost = new Team3Ghost();
+//        try {
+//            ghost = new Team3Ghost();
+//        } catch(IOException exc) {
+//            System.exit(1);
+//        }
         c1 = "39.203922";
         c2 = "30.203492";
-        //END OF NEW CODE
 
-        // array of cities, needs to be deleted
-//        City[] cities = {new City("Tempe", "33.424564", "-111.928001"), new City("Dubai", "25.276987", "55.296249")
-//                , new City("New York City", "40.730610", "-73.935242"), new City("Mexico City", "19.432608", "-99.133209"), new City("Tokyo", "35.652832", "139.839478"), new City("Paris", "48.864716", "2.349014"), new City("Singapore", "1.290270", "103.851959"), new City("San Francisco", "37.733795", "-122.446747"), new City("London", "51.501476", "-0.140634"), new City("New Delhi", "28.644800", "77.216721")};
-//
-//        // dialog box to choose name of city in drop down box
-//        String[] choices = {"Tempe", "Dubai", "New York City", "Mexico City", "Tokyo", "Paris" , "Singapore", "San Francisco" , "London", "New Delhi"};
-//        String s = (String) JOptionPane.showInputDialog(null, "Select a city:", "Dialog Box", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
-//
-//        // iterate through array
-//        for (int i = 0; i < cities.length; i++)
-//        {
-//
-//            // if name entered is same as name of city at cities[i]
-//            if (cities[i].getName().equals(s) )
-//            {
-//                // set c1 to latitude
-//                c1 = cities[i].getLatitude();
-//
-//                // set c2 to longitude
-//                c2 = cities[i].getLongitude();
-//            }
-//        }
         weatherStatus = new JLabel();
         humidity = new JLabel();
         temperature = new JLabel();
-
-
-        //Adapted from the main method of the ExampleWeather class
-//        try {
-//            JSONObject json = readJsonFromUrl("https://api.darksky.net/forecast/0297297911820662b2dfd6c18b18a183/" + c1 + "," + c2);
-//            //Prints image to debugging console. Need to create a graphical representation.
-//            System.out.println(json.toString());
-//            System.out.println(json.getJSONObject("currently").getString("summary"));
-//
-//            //Display Fonts
-//            weatherStatus.setFont(new Font("Arial", Font.PLAIN, 10));
-//            visibility.setFont(new Font("Arial", Font.PLAIN, 10));
-//            temperature.setFont(new Font("Arial", Font.PLAIN, 10));
-//            //Alignments
-//            weatherStatus.setHorizontalAlignment(SwingConstants.RIGHT);
-//            visibility.setHorizontalAlignment(SwingConstants.RIGHT);
-//            temperature.setHorizontalAlignment(SwingConstants.RIGHT);
-//            //Setting Text
-//            weatherStatus.setText("" + json.getJSONObject("currently").getString("summary"));
-//            visibility.setText("Visibility: " + Double.toString(json.getJSONObject("currently").getDouble("visibility")));
-//            temperature.setText("Temperature: " + Double.toString(json.getJSONObject("currently").getDouble("apparentTemperature")) + Character.toString((char) 176));
-//
-//        } catch(IOException e) { //If URL is invalid
-//            System.exit(1);
-//        }
 
         //Add weather info to display
         weatherPanel.add(weatherStatus);
         weatherPanel.add(humidity);
         weatherPanel.add(temperature);
-//        weatherPanel.add(chooseLocation);
 
         //Generate team3.jpg file for use in display
         renderMap(c1, c2);
-        //Sets appropriate sizes for JPanels so content will display correctly
+
+        //Sets appropriate sizes for JPanels
         mapPanel.setPreferredSize(new Dimension(100, 100));
         weatherPanel.setPreferredSize(new Dimension(100,100));
 
@@ -127,7 +82,6 @@ public class Team3 extends JPanel implements ActionListener{
         mainPanel.add(mapPanel);
         mainPanel.add(weatherPanel);
 
-        //NEW CODE
         layeredPane.setPreferredSize(new Dimension(200,100));
         mainPanel.setBounds(0,0,200,100);
         layeredPane.add(mainPanel, new Integer(0));
@@ -135,12 +89,10 @@ public class Team3 extends JPanel implements ActionListener{
         layeredPane.add(chooseLocation, new Integer(2));
         cover.setBounds(0,0,200,100);
         layeredPane.add(cover, new Integer(1));
-        ghost.setBounds(25,25,100,100);
-        layeredPane.add(ghost, 3);
+        ghost.setBounds(0,0,200,100);
+        layeredPane.add(ghost, new Integer(4));
         layeredPane.setVisible(true);
 
-        //END NEW CODE
-//        this.add(mainPanel);
         this.add(layeredPane);
         this.setVisible(true);
     }
@@ -212,31 +164,27 @@ public class Team3 extends JPanel implements ActionListener{
             return name;
         }
     }
-    //NEW CODE
+
     public void actionPerformed(ActionEvent e) {
+        //Redraw layeredPane
         layeredPane.removeAll();
-        System.out.print("Action Performed");
-        // array of cities
+
+        System.out.print("Action Performed"); // FOR DEBUGGING
+
+        //City list for dialog
         City[] cities = {new City("Tempe", "33.424564", "-111.928001"), new City("Dubai", "25.276987", "55.296249")
                 , new City("New York City", "40.730610", "-73.935242"), new City("Mexico City", "19.432608", "-99.133209"), new City("Tokyo", "35.652832", "139.839478"), new City("Paris", "48.864716", "2.349014"), new City("Singapore", "1.290270", "103.851959"), new City("San Francisco", "37.733795", "-122.446747"), new City("London", "51.501476", "-0.140634"), new City("New Delhi", "28.644800", "77.216721")};
-
-        // dialog box to choose name of city in drop down box
+        //Dialog to choose city
         String[] choices = {"Tempe", "Dubai", "New York City", "Mexico City", "Tokyo", "Paris" , "Singapore", "San Francisco" , "London", "New Delhi"};
         String s = (String) JOptionPane.showInputDialog(null, "Select a city:", "Dialog Box", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
-
-        // iterate through array
         for (int i = 0; i < cities.length; i++)
         {
-            // if name entered is same as name of city at cities[i]
-            if (cities[i].getName().equals(s) )
-            {
-                // set c1 to latitude
+            if (cities[i].getName().equals(s)) {
                 c1 = cities[i].getLatitude();
-
-                // set c2 to longitude
                 c2 = cities[i].getLongitude();
             }
         }
+
         //Redraw mapPanel
         renderMap(c1, c2);
         mapPanel.removeAll();
@@ -246,14 +194,14 @@ public class Team3 extends JPanel implements ActionListener{
 
         //Redraw weatherPanel
         weatherPanel.removeAll();
+
         //Adapted from the main method of the ExampleWeather class
         try {
             JSONObject json = readJsonFromUrl("https://api.darksky.net/forecast/"
-                    +"471b2e77a753973c9a5b7df0420c5975/" + c1 + "," + c2);
+                    +"58402e9dc3a740efde7142594af11c6d/" + c1 + "," + c2);
             //Prints image to debugging console. Need to create a graphical representation.
             System.out.println(json.toString());
             System.out.println(json.getJSONObject("currently").getString("summary"));
-
             //Display Fonts
             weatherStatus.setFont(new Font("Arial", Font.PLAIN, 10));
             humidity.setFont(new Font("Arial", Font.PLAIN, 10));
@@ -266,15 +214,14 @@ public class Team3 extends JPanel implements ActionListener{
             weatherStatus.setText("" + json.getJSONObject("currently").getString("summary"));
             humidity.setText("Humidity: " + Double.toString(json.getJSONObject("currently").getDouble("humidity")));
             temperature.setText("Temperature: " + Double.toString(json.getJSONObject("currently").getDouble("apparentTemperature")) + Character.toString((char) 176));
-
-        } catch(IOException ex) { //If URL is invalid
+        } catch(IOException ex) {
             System.exit(1);
         }
+
         //Add weather info to display
         weatherPanel.add(weatherStatus);
         weatherPanel.add(humidity);
         weatherPanel.add(temperature);
-//        weatherPanel.add(chooseLocation);
 
         weatherPanel.revalidate();
 
@@ -282,14 +229,8 @@ public class Team3 extends JPanel implements ActionListener{
         layeredPane.add(mainPanel, new Integer(0));
         chooseLocation.setBounds(100,75,75, 25);
         layeredPane.add(chooseLocation, new Integer(2));
-        ghost.setBounds(25,25,100,100);
-        layeredPane.add(ghost, 4);
-//        cover.setBounds(0,0,200,100);
-//        layeredPane.add(cover, new Integer(1));
-
-
+        ghost.setBounds(0,0,200,100);
+        layeredPane.add(ghost, new Integer(4));
         layeredPane.revalidate();
     }
-    //NEW CODE END
-
 }
