@@ -41,7 +41,7 @@ public class Team1 extends JPanel implements MouseListener {
 	JPanel weatherPanel = new JPanel();
 	private JPanel basePanel = new JPanel();
 	private final static String FILE_PATH = "Team1Images/";
-	public final static String GHOST_FILE_NAME = FILE_PATH + "red_ghost.jpg";
+	public final static String GHOST_FILE_NAME = FILE_PATH + "red_ghost.gif";
 	// LOCATIONS
 	HashMap<String, String> cityLocMap = new HashMap<String, String>();
 	private String[] loc = { "33.424564,-111.928001", "40.730610,-73.935242",
