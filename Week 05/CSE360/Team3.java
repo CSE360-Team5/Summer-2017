@@ -3,7 +3,7 @@
 //          Thunpisit Amnuaikiatloet
 //          Melissa Day
 
-package CSE360;
+//package CSE360;
 
 import java.awt.*;
 
@@ -143,27 +143,6 @@ public class Team3 extends JPanel implements ActionListener {
             is.close();
         }
     }
-    // City class
-    private class City {
-        private String name;
-        private String latitude;
-        private String longitude;
-        public City(String name, String latitude, String longitude) {
-            this.name = name;
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-        public String getLongitude() {
-            return longitude;
-        }
-        public String getName() {
-            return name;
-        }
-    }
 
     public void actionPerformed(ActionEvent e) {
         //Redraw layeredPane
@@ -172,8 +151,8 @@ public class Team3 extends JPanel implements ActionListener {
         System.out.print("Action Performed"); // FOR DEBUGGING
 
         //City list for dialog
-        City[] cities = {new City("Tempe", "33.424564", "-111.928001"), new City("Dubai", "25.276987", "55.296249")
-                , new City("New York City", "40.730610", "-73.935242"), new City("Mexico City", "19.432608", "-99.133209"), new City("Tokyo", "35.652832", "139.839478"), new City("Paris", "48.864716", "2.349014"), new City("Singapore", "1.290270", "103.851959"), new City("San Francisco", "37.733795", "-122.446747"), new City("London", "51.501476", "-0.140634"), new City("New Delhi", "28.644800", "77.216721")};
+        Team3City[] cities = {new Team3City("Tempe", "33.424564", "-111.928001"), new Team3City("Dubai", "25.276987", "55.296249")
+                , new Team3City("New York City", "40.730610", "-73.935242"), new Team3City("Mexico City", "19.432608", "-99.133209"), new Team3City("Tokyo", "35.652832", "139.839478"), new Team3City("Paris", "48.864716", "2.349014"), new Team3City("Singapore", "1.290270", "103.851959"), new Team3City("San Francisco", "37.733795", "-122.446747"), new Team3City("London", "51.501476", "-0.140634"), new Team3City("New Delhi", "28.644800", "77.216721")};
         //Dialog to choose city
         String[] choices = {"Tempe", "Dubai", "New York City", "Mexico City", "Tokyo", "Paris" , "Singapore", "San Francisco" , "London", "New Delhi"};
         String s = (String) JOptionPane.showInputDialog(null, "Select a city:", "Dialog Box", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
