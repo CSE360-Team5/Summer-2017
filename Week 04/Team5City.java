@@ -1,11 +1,12 @@
 package CSE360;
 
-/* Team 5
-- * @author Melissa Day
-- * @author Austin McCleary
-- * @author Zelin Bao
-- * @author Yuxue Zhou
-*/
+/*
+ * Team 5
+ * @author Melissa Day
+ * @author Austin McCleary
+ * @author Zelin Bao
+ * @author Yuxue Zhou
+ */
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ public class Team5City extends JPanel {
 	public Team5City() {
 		// Creates main panel to put two panels into
 		main = new JPanel(new BorderLayout());
+	
 		// Creates extra panel to put all data and button into
 		extra = new JPanel(new BorderLayout());
 		// Adds weather and google map panel together
@@ -56,10 +58,23 @@ public class Team5City extends JPanel {
 				PromptForInput();
 			}
 		});
+		
+	
 		main.setBorder(BorderFactory.createLineBorder(Color.red, 1));
-		main.setSize(500,125);
+		main.setSize(500,500);
 		main.setOpaque(false);
 		add(main);
+		main.setVisible(true);
+		
+		
+		//add ghost
+		ghost Ghost = new ghost();
+		main.add(Ghost);
+		Ghost.setVisible(true);
+		Ghost.setOpaque(true);
+		
+		
+		
 	}
 
 	public void PromptForInput() {
