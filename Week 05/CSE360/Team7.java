@@ -4,6 +4,27 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+/* 
+File: Team7.java
+    @author : Haoyu Xu
+    @author : Chen Yang
+    @author : Pemma Reiter
+Description:
+    This file is the top level JPanel that will be instantiated in the Universe JFrame (owned by Professor Gonzalez-Sanchez and Rao)
+    Team7 contains multiple components:
+        JLayeredPane layer : Layer object to keep track of multiple JPanel objects
+        Team7Cover : Class that encapsulates Project 1 JPanel for Team7
+        Team7Proj2Panel : Class that encapsulates Project 2, Map + Weather Information aggregate JPanel
+        Team7OverlayObject : JPanel object displaying a gear that when clicked on, changes the Panel Layers or updates the Map+Weather
+        Team7Ghost : ghost png image that moves around in a concurrent process/thread
+    simple components:
+        boolean initialState : is a variable that is set to false after first mouse click changes JPanel from first view to final view
+        int xbound : default max X size for all components, passed to all components so that default look and any later scaling (TBD) is consistent
+        int ybound : default max X size for all components, passed to all components so that default look and any later scaling (TBD) is consistent
+        String imagePath : Path to all images used in these components, ensures that only one path should be touched
+
+*/
+
 public class Team7 extends JPanel
 {
     JLayeredPane layer;
@@ -12,11 +33,15 @@ public class Team7 extends JPanel
     Team7OverlayObject gear;
     Team7Ghost ghost;
     boolean initialState;
-    private static int xbound=300;
-    private static int ybound=200;
+    private int xbound=200;
+    private int ybound=150;
+    private String imagePath = "CSE360/Team7Images";
 
     public Team7()
     {
+      //  System.out.println("Height: "+Float.toString(this.getRootPane().getSize().height)+" ; Width: "+Float.toString(this.getRootPane().getSize().width));
+        this.setBackground(Color.white);
+        
         initialState=true;
         this.setPreferredSize(new Dimension(xbound, ybound));
         setOpaque(false);
@@ -25,12 +50,16 @@ public class Team7 extends JPanel
         
         p1 = new Team7Cover();
         p1.setSize(new Dimension(xbound, ybound));
+        p1.setPreferredSize(new Dimension(xbound,ybound));
         
-        p2 = new Team7Proj2Panel();
+        p2 = new Team7Proj2Panel(xbound,ybound,imagePath);
         p2.setSize(new Dimension(xbound, ybound));
+        p2.setPreferredSize(new Dimension(xbound, ybound));
         
-        gear = new Team7OverlayObject(xbound, ybound);
-        ghost = new Team7Ghost(xbound, ybound);
+        gear = new Team7OverlayObject(xbound, ybound,imagePath);
+        gear.setPreferredSize(new Dimension(xbound, ybound));
+        ghost = new Team7Ghost(xbound, ybound,imagePath);
+        
         gear.addMouseListener(new MouseAdapter(){
           @Override
           public void mouseClicked(MouseEvent e) { 
@@ -49,12 +78,13 @@ public class Team7 extends JPanel
             }
           }      
         });
-        JButton toggle = new JButton("toggle");
-        toggle.setBounds(200, 50, 50, 50);
-        
-        toggleListener t = new toggleListener();
-        toggle.addActionListener(t);
+//        JButton toggle = new JButton("toggle");
+//        toggle.setBounds(200, 50, 50, 50);
+//        
+//        toggleListener t = new toggleListener();
+//        toggle.addActionListener(t);
 //        layer.add(toggle, new Integer(4));
+        
         layer.add(gear, new Integer(4));
         layer.add(p1, new Integer(3));
         layer.add(ghost, new Integer(2));
