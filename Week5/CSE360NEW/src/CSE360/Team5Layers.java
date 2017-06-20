@@ -12,6 +12,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -22,6 +25,10 @@ public class Team5Layers extends JPanel {
 	public Team5Layers() {
 		JPanel complete = new JPanel();
 		//JPanel ghost = new JPanel();
+		layer layer1 = new layer();
+		
+		layer1.setVisible(true);
+		layer1.setOpaque(false);
 		//ghost.add(new Team5Ghost());
 		JPanel weather = new JPanel();
 		weather.add(new Team5City());
@@ -29,7 +36,7 @@ public class Team5Layers extends JPanel {
 		// create layered pane
     	JLayeredPane layers = new JLayeredPane();
     	layers.setLayout(new BorderLayout());
-    	//layers.add(ghost, 1);
+    	layers.add(layer1, 1);
     	layers.add(weather, 0);
     	//ghost.setOpaque(false);
     	
@@ -52,4 +59,21 @@ public class Team5Layers extends JPanel {
 		
 		add(complete);
 	}
+	
+	public class layer extends JPanel{
+		
+			JPanel layer;
+			JLabel label;
+			
+			public layer(){
+
+				JLabel label = new JLabel(new ImageIcon(
+				           (new ImageIcon(this.getClass().getResource("/Team5Images/Ghost.png")).getImage())));
+				label.setVisible(true);
+				
+				add(label);
+		}
+		
+	}
+	
 }

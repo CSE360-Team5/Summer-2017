@@ -22,7 +22,7 @@ public class Team5 extends JPanel implements ActionListener {
 
 		// Add border
 		setBorder(BorderFactory.createLineBorder(Color.green, 5));
-		setSize(500,600);
+		setSize(250,155);
 		// Add names
 		JLabel label1 = new JLabel("Team 5:");
 		JLabel label2 = new JLabel("Austin McCleary,");

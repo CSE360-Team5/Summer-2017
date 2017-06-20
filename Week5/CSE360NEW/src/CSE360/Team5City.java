@@ -50,9 +50,14 @@ public class Team5City extends JPanel {
 		// Adds weather and google map panel together
 		extra.add(Weather(), BorderLayout.EAST);
 		extra.add(Google(), BorderLayout.WEST);
+		
+		extra.setOpaque(false);
 		// Adds Weather and Google panels to the main panel
 		main.add(extra, BorderLayout.NORTH);
+		
 		main.add(button = new JButton("Select City"), BorderLayout.SOUTH);
+		button.setOpaque(false);
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PromptForInput();
@@ -61,7 +66,7 @@ public class Team5City extends JPanel {
 		
 	
 		main.setBorder(BorderFactory.createLineBorder(Color.red, 1));
-		main.setSize(500,500);
+		main.setSize(250,125);
 		main.setOpaque(false);
 		add(main);
 		main.setVisible(true);
@@ -191,7 +196,7 @@ public class Team5City extends JPanel {
 		// Set Background
 		weather.setBackground(Color.white);
 		// Returns JPanel
-		//weather.setOpaque(false);
+		weather.setOpaque(false);
 		return weather;
 	}
 
@@ -244,10 +249,20 @@ public class Team5City extends JPanel {
 		}
 		map.setPreferredSize(new Dimension(250, 125));
 		// Adds map to map Panel
+		/*
 		map.add(new JLabel(new ImageIcon(
 				(new ImageIcon("image.jpg")).getImage().getScaledInstance(175, 175, java.awt.Image.SCALE_SMOOTH))));
+		
+		*/
+		JLabel labelMap = new JLabel(new ImageIcon(
+				(new ImageIcon("image.jpg")).getImage().getScaledInstance(175, 175, java.awt.Image.SCALE_SMOOTH))); 
+		
+		labelMap.setOpaque(false);
+		
+		map.add(labelMap);
 		// Returns map panel
-		//map.setOpaque(true);
+		
+		map.setOpaque(false);
 		return map;
 	}
 }

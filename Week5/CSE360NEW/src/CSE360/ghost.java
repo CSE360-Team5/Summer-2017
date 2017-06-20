@@ -14,10 +14,11 @@ public class ghost extends JPanel implements Runnable{
 	
 	public ghost(){
 		
-		//JPanel gh = new JPanel(new BorderLayout());
+	;
 	  JLabel ghost = new JLabel(new ImageIcon(
            (new ImageIcon(this.getClass().getResource("/Team5Images/Ghost.png")).getImage())));
-      //gh.setSize(500, 500);
+      
+	  ghost.setSize(49, 49);
 	  add(ghost, BorderLayout.CENTER);
 	  Ghost = new Thread (this);
 	  Ghost.start();
@@ -50,7 +51,7 @@ public class ghost extends JPanel implements Runnable{
 	 					//y = 5;
 	 				}
 	 				
-	 				if (x < 0) {
+	 				if (x <= -250) {
 	 					xvalueChange = xChange;
 	 				}
 	 				
