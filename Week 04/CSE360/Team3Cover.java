@@ -1,5 +1,5 @@
 // specify which package the file is in
-//package CSE360;
+package CSE360;
 
 // Team Member Names:
 // Devyn Hedin
@@ -9,8 +9,6 @@
 
 // need to import for JPanel and JRadioButton
 import javax.swing.*;
-import java.awt.*;
-
 // Team3 Class inherits from JPanel
 public class Team3Cover extends JPanel {
 

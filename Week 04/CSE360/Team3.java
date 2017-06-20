@@ -3,7 +3,7 @@
 //          Thunpisit Amnuaikiatloet
 //          Melissa Day
 
-//package CSE360;
+package CSE360;
 
 import java.awt.*;
 
@@ -29,13 +29,10 @@ public class Team3 extends JPanel implements ActionListener {
     private JPanel mainPanel, mapPanel, weatherPanel; //super panel with two sub panels for the map and for the weather
     private JLabel weatherStatus, humidity, temperature; //Three pieces of weather information
     private String c1, c2; //Coordinates
-    //NEW CODE
     private JLayeredPane layeredPane;
     private JButton chooseLocation;
     private Team3Cover cover;
     private Team3Ghost ghost;
-    private Thread thread;
-    //END NEW CODE
 
     // Team3 constructor
     public Team3() throws JSONException {
@@ -49,11 +46,6 @@ public class Team3 extends JPanel implements ActionListener {
         chooseLocation.addActionListener(this);
         cover = new Team3Cover();
         ghost = new Team3Ghost();
-//        try {
-//            ghost = new Team3Ghost();
-//        } catch(IOException exc) {
-//            System.exit(1);
-//        }
         c1 = "39.203922";
         c2 = "30.203492";
 
